@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Match Users</title>
+  <title>User matching</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" />
   <link rel="stylesheet" href="https://unpkg.com/bulma@0.8.0/css/bulma.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/js/all.min.js" charset="utf-8"></script>
@@ -29,7 +29,7 @@
           <div id="navbarMenu" class="navbar-menu">
             <div class="navbar-end">
               <span class="navbar-item">
-                <a class="button is-grey is-outlined" href="https://github.com/BulmaTemplates/bulma-templates/blob/master/templates/landing.html">
+                <a class="button is-grey is-outlined" href="https://github.com/acolle/matching-system-socket-io" target="_blank">
                   <span class="icon">
                     <i class="fab fa-github"></i>
                   </span>
@@ -44,14 +44,17 @@
 
     <div class="hero-body">
       <div class="container">
+        <div id="matchBox" class="box has-text-white has-background-primary is-hidden">
+          <span class="icon is-small is-left has-text-white">
+            <i class="fas fa-check"></i>
+          </span>
+        </div>
         <div class="columns is-centered">
           <div class="column is-half">
             <div class="box">
               <div class="has-text-centered is-size-6 has-text-weight-normal">
                 <p>Each form submission represents a new user entering the matching pool</p>
-                <span class="icon is-small is-left">
-                  <i class="fas fa-angle-double-down"></i>
-                </span>
+                <hr>
               </div>
 
               <form id="form">

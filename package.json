@@ -1,14 +1,14 @@
 {
   "name": "matching-system-socket-io",
   "version": "1.0.0",
-  "description": "",
+  "description": "A Vanilla JS / Node implementation of a matching system using Socket.IO ",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js -e js,html,css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Anthony Colle",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",

@@ -1,6 +1,7 @@
 let socket;
 
 const form = document.getElementById('form');
+const matchBox = document.getElementById('matchBox');
 const userList = document.getElementById('userList');
 const clearButton = document.getElementById('clear-button');
 const inputElements = [
@@ -31,8 +32,8 @@ window.addEventListener('load', () => {
   });
 
   socket.on('proceed match', ({ user, matchedUser }) => {
-    console.log(`${user.username} has been matched with ${matchedUser.username}`);
-    // TODO: Implement UI
+    // console.log(`${user.username} has been matched with ${matchedUser.username}`);
+    displayMatchBox(user, matchedUser);
   });
 });
 form.addEventListener('submit', submitForm);
@@ -59,17 +60,39 @@ function addUser(user) {
   let listnode = document.createElement("LI");
   let divnode = document.createElement("DIV");
   divnode.classList.add('panel-block', 'is-active');
-  let spannode = document.createElement("SPAN");
-  spannode.classList.add('panel-icon');
-  let inode = document.createElement("I");
-  inode.classList.add('fas', 'fa-user');
-  inode.setAttribute('aria-hidden', 'true');
-  spannode.appendChild(inode);
-  divnode.appendChild(spannode);
+
+  // Basic user icon
+  // let spannode = document.createElement("SPAN");
+  // spannode.classList.add('panel-icon');
+  // let inode = document.createElement("I");
+  // inode.classList.add('fas', 'fa-user');
+  // inode.setAttribute('aria-hidden', 'true');
+  // spannode.appendChild(inode);
+  // divnode.appendChild(spannode);
+
+  // With dynamic avatar
+  let imgnode = document.createElement("IMG");
+  imgnode.setAttribute('src', `https://avatars.dicebear.com/v2/human/${user}.svg?options[width]=64`);
+  imgnode.setAttribute('alt', 'user_avatar');
+  imgnode.setAttribute('style', 'margin-right: 6px')
+  divnode.appendChild(imgnode);
   let textnode = document.createTextNode(user);
   divnode.appendChild(textnode);
   listnode.appendChild(divnode);
+  listnode.setAttribute('style', 'border-bottom: 1px solid lightgrey; font-size: 18px')
   return listnode;
+}
+
+// Display the latest match in a box
+function displayMatchBox(user, matchedUser) {
+  let textnode = document.createTextNode(`${user.username} has been matched with ${matchedUser.username}`);
+  matchBox.appendChild(textnode);
+  // matchBox.innerHTML = `${user.username} has been matched with ${matchedUser.username}`;
+  matchBox.classList.remove('is-hidden');
+  setTimeout(() => {
+    matchBox.classList.add('is-hidden');
+    matchBox.innerHTML = "";
+  }, 5000)
 }
 
 // Format input data before sending to server
@@ -90,7 +113,7 @@ function submitForm(event) {
   event.preventDefault();
   const data = formatInputData(inputElements);
   socket.emit('add user', data);
-  // clearForm();
+  clearForm();
 
   // postData('http://localhost:3000/match', { message: "Hello from the client" })
   // .then((data) => {
