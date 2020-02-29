@@ -4,7 +4,7 @@ const app = express();
 const http = require('http').createServer(app);
 const { createSocketServer } = require('./socketServer');
 const router = require('./router');
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json({ extended: true }));
